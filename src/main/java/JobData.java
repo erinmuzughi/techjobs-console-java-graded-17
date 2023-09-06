@@ -95,8 +95,23 @@ public class JobData {
         // load data, if not already loaded
         loadData();
 
-        // TODO - implement this method
-        return null;
+        // TODO - implement this method - which is to enable a search that looks for the search term in all columns;
+        //  go through each hashmap and check against every value for the search term; will need to build some sort of
+        //local list, another ArrayList of HashMaps to keep track of the results that contain the search term; need
+        // to make sure I don't get any duplicates in my results;
+        ArrayList<HashMap<String, String>> jobsByValue = new ArrayList<>();
+        boolean alreadyAdded = false;
+
+        for (HashMap<String, String> row : allJobs) { //iterates through the ArrayList
+            for (String rowValue : row.values()) { //iterates through the HashMap
+                if (rowValue.contains(value) && !alreadyAdded) {
+                        jobsByValue.add(row);
+                        alreadyAdded = true;
+                        break;
+                    }
+                }
+            }
+        return jobsByValue;
     }
 
     /**
