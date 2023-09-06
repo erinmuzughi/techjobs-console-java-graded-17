@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by LaunchCode
@@ -117,9 +114,22 @@ public class TechJobs {
         return choiceKeys[choiceIdx];
     }
 
-    // Print a list of jobs
+    // TO DO: Print a list of jobs - This is meant to print a list of jobs to the console in a nicely formatted manner,
+    // but hasn’t been implemented yet. To do this, you’ll need to iterate over an ArrayList of jobs. Each job is
+    // itself a HashMap. While you can get each of the items out of the HashMap using the known keys
+    // (employer, location, etc.), think instead about creating a nested loop to loop over each HashMap. If a new
+    // field is added to the job records, this approach will print out the new field without any updates to printJobs.
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
-
-        System.out.println("printJobs is not implemented yet");
+        for (HashMap<String, String> someJob : someJobs) {
+            System.out.println("*****");
+                for (Map.Entry<String, String> job : someJob.entrySet()) {
+                System.out.println(job.getKey() + ": " + job.getValue());
+            }
+            System.out.println("*****\n");
+        }
+        if (someJobs.size() == 0) {
+            System.out.println("No Results");
+        }
+//        System.out.println("printJobs is not implemented yet");
     }
 }

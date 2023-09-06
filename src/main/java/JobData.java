@@ -31,6 +31,7 @@ public class JobData {
 
         // load data, if not already loaded
         loadData();
+        System.out.println("hi mom");
 
         ArrayList<String> values = new ArrayList<>();
 
@@ -110,7 +111,7 @@ public class JobData {
 
         try {
 
-            // Open the CSV file and set up pull out column header info and records
+            // Open the CSV file and set up pull out column header info and records - meaning this pulls out the column information and records
             Reader in = new FileReader(DATA_FILE);
             CSVParser parser = CSVFormat.RFC4180.withFirstRecordAsHeader().parse(in);
             List<CSVRecord> records = parser.getRecords();
@@ -119,7 +120,7 @@ public class JobData {
 
             allJobs = new ArrayList<>();
 
-            // Put the records into a more friendly format
+            // Put the records into a more friendly format, this reformats the records into a hashmap which has string keys and string values
             for (CSVRecord record : records) {
                 HashMap<String, String> newJob = new HashMap<>();
 
@@ -127,7 +128,7 @@ public class JobData {
                     newJob.put(headerLabel, record.get(headerLabel));
                 }
 
-                allJobs.add(newJob);
+                allJobs.add(newJob); //this allows you to add new jobs to the ArrayList
             }
 
             // flag the data as loaded, so we don't do it twice
