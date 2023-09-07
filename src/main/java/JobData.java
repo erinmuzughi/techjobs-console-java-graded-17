@@ -31,7 +31,6 @@ public class JobData {
 
         // load data, if not already loaded
         loadData();
-        System.out.println("hi mom");
 
         ArrayList<String> values = new ArrayList<>();
 
@@ -40,9 +39,9 @@ public class JobData {
 
             if (!values.contains(aValue)) {
                 values.add(aValue);
+                Collections.sort(values); //sorts the list in ascending order alphabetically
             }
         }
-
         return values;
     }
 
@@ -51,7 +50,9 @@ public class JobData {
         // load data, if not already loaded
         loadData();
 
-        return allJobs;
+        ArrayList<HashMap<String, String>> copyOfAllJobs = new ArrayList<>(allJobs); //this creates a new ArrayList which contains the data from allJobs but any modifications to it will not affect allJobs
+
+        return copyOfAllJobs;
     }
 
     /**
@@ -76,7 +77,7 @@ public class JobData {
 
             String aValue = row.get(column);
 
-            if (aValue.contains(value)) {
+            if (aValue.toUpperCase().contains(value.toUpperCase())) { //compares the search term and values in the hashmap in uppercase without changing the data to ensure case insensitivity
                 jobs.add(row);
             }
         }
@@ -100,18 +101,17 @@ public class JobData {
         //local list, another ArrayList of HashMaps to keep track of the results that contain the search term; need
         // to make sure I don't get any duplicates in my results;
         ArrayList<HashMap<String, String>> jobsByValue = new ArrayList<>();
-        boolean alreadyAdded = false;
 
         for (HashMap<String, String> row : allJobs) { //iterates through the ArrayList
             for (String rowValue : row.values()) { //iterates through the HashMap
-                if (rowValue.contains(value) && !alreadyAdded) {
-                        jobsByValue.add(row);
-                        alreadyAdded = true;
-                        break;
+
+                if (rowValue.toUpperCase().contains(value.toUpperCase())) { //checks to see if the rowValue contains the searchTerm (value) by comparing them both as uppercase to ensure case insensitivity without changing the case itself
+                        jobsByValue.add(row); //if it does match, the HashMap is added to our new ArrayList
+                    break; //breaks out of this inner loop so we continue to iterate through the ArrayList and we don't get any duplicates
                     }
                 }
             }
-        return jobsByValue;
+        return jobsByValue; //returns the new ArrayList based on the search term the user entered and is called in the TechJobs class, and results are printed via the printJobs method in that class
     }
 
     /**

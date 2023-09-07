@@ -121,14 +121,14 @@ public class TechJobs {
     // field is added to the job records, this approach will print out the new field without any updates to printJobs.
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
         for (HashMap<String, String> someJob : someJobs) {
-            System.out.println("*****");
+            System.out.println("\n*****");
                 for (Map.Entry<String, String> job : someJob.entrySet()) {
                 System.out.println(job.getKey() + ": " + job.getValue());
             }
-            System.out.println("*****\n");
+            System.out.println("*****");
         }
         if (someJobs.size() == 0) {
-            System.out.println("No Results");
+            System.out.print("No Results");
         }
 //        System.out.println("printJobs is not implemented yet");
     }
